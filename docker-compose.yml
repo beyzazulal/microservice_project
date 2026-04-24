@@ -1,15 +1,30 @@
 version: '3.8'
 
 services:
-  gitea:
-    image: gitea/gitea:latest
-    container_name: local_github_gitea
-    environment:
-      - USER_UID=1000
-      - USER_GID=1000
-    restart: always
+
+  user-service:
+    build: ./user-service
+    container_name: user_service
     ports:
-      - "3000:3000"
-      - "2222:22"
-    volumes:
-      - ./gitea_data:/data
+      - "5001:5001"
+    networks:
+      - microservice-net
+
+  order-service:
+    build: ./order-service
+    container_name: order_service
+    ports:
+      - "5002:5002"
+    environment:
+      - USER_SERVICE_URL=http://user-service:5001
+    depends_on:
+      - user-service
+    networks:
+      - microservice-net
+
+  # 3. servis (notification-service) arkadaşın branch'inde olacak
+  # docker-compose.yml merge edilince buraya eklenecek
+
+networks:
+  microservice-net:
+    driver: bridge

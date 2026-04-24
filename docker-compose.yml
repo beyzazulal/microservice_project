@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # --- 1. SENİN KURDUĞUN ALTYAPI (GITEA) ---
   gitea:
     image: gitea/gitea:latest
     container_name: local_github_gitea
@@ -13,3 +14,38 @@ services:
       - "2222:22"
     volumes:
       - ./gitea_data:/data
+
+  # --- 2. SENİN YAZDIĞIN BİLDİRİM SERVİSİ ---
+  notification-service:
+    build: ./NotificationService/NotificationService
+    container_name: notification_service
+    ports:
+      - "8080:8080" # Kendi servisin için ayarladığın port
+    networks:
+      - microservice-net
+
+  # --- 3. ARKADAŞININ YAZDIĞI SERVİSLER ---
+  user-service:
+    build: ./user-service
+    container_name: user_service
+    ports:
+      - "5001:5001"
+    networks:
+      - microservice-net
+
+  order-service:
+    build: ./order-service
+    container_name: order_service
+    ports:
+      - "5002:5002"
+    environment:
+      - USER_SERVICE_URL=http://user-service:5001
+    depends_on:
+      - user-service
+    networks:
+      - microservice-net
+
+# Tüm servislerin birbiriyle konuşmasını sağlayan ortak ağ
+networks:
+  microservice-net:
+    driver: bridge

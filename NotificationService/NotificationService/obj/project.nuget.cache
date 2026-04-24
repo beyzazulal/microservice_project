@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "kNixcJAhBLA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rumey\\source\\repos\\NotificationService\\NotificationService\\NotificationService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rumey\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.4\\microsoft.aspnetcore.openapi.10.0.4.nupkg.sha512",
+    "C:\\Users\\rumey\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

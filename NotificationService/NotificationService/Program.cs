@@ -1,23 +1,28 @@
+using System.Text;
+using System.Text.Json;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Diğer servisler buraya bildirim mesajı gönderecek
+app.MapPost("/api/notify", async (NotificationRequest req) =>
 {
-    app.MapOpenApi();
-}
+    var slackUrl = "https://hooks.slack.com/services/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";
+    
+    var payload = new { text = $"📢 *Sistem Bildirimi:*\n{req.Message}" };
+    
+    using var client = new HttpClient();
+    var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+    
+    var response = await client.PostAsync(slackUrl, content);
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+    if (response.IsSuccessStatusCode)
+        return Results.Ok("Bildirim Slack'e gönderildi.");
+    
+    return Results.Problem("Slack bağlantı hatası!");
+});
 
 app.Run();
+
+// Beklediğimiz veri yapısı
+record NotificationRequest(string Message);

@@ -63,6 +63,7 @@ services:
     networks:
       - microservice-net
 
+
 # Tüm servislerin birbiriyle konuşmasını sağlayan ortak ağ
 networks:
   microservice-net:

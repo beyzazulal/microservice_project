@@ -1,5 +1,48 @@
-services:
+version: '3.8'
 
+services:
+  # --- 1. SENİN KURDUĞUN ALTYAPI (GITEA) ---
+  gitea:
+    image: gitea/gitea:latest
+    container_name: local_github_gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    volumes:
+      - ./gitea_data:/data
+    networks:
+      - microservice-net
+
+  # --- 2. SENİN YAZDIĞIN BİLDİRİM SERVİSİ ---
+  notification-service:
+    build: ./NotificationService/NotificationService
+    container_name: notification_service
+    ports:
+      - "8080:8080" # Kendi servisin için ayarladığın port
+    networks:
+      - microservice-net
+
+  # --- 3. WEBHOOK SERVİSİ (Smart Commits + Jira entegrasyonu) ---
+  webhook-service:
+    build: ./webhook-service
+    container_name: webhook_service
+    ports:
+      - "5003:5003"
+    environment:
+      - JIRA_DOMAIN=beyzazulalodabasi.atlassian.net
+      - JIRA_EMAIL=rumeysasemiz11@gmail.com
+      - JIRA_API_TOKEN=ATATT3xFfGF0ct8Lp5_6ozAgaI7OqTyccvx74uWCN8NywErIjKY46ze2VbrBLNhmpmg2bNkuldzhoCkfbT-gglRChnM1TKyLKCYps2f_Y8fh55VvXddHvMTV-voOY2nKmeQ7WbPprpB-kPIzOcW7dzbv06eO9c4wCjRZ1s82T8oIsv8chvmL3vc=88618A25
+      - NOTIFICATION_SERVICE_URL=http://notification-service:8080
+    depends_on:
+      - notification-service
+    networks:
+      - microservice-net
+
+  # --- 4. ARKADAŞININ YAZDIĞI SERVİSLER ---
   user-service:
     build: ./user-service
     container_name: user_service
@@ -20,9 +63,8 @@ services:
     networks:
       - microservice-net
 
-  # 3. servis (notification-service) arkadaşın branch'inde olacak
-  # docker-compose.yml merge edilince buraya eklenecek
 
+# Tüm servislerin birbiriyle konuşmasını sağlayan ortak ağ
 networks:
   microservice-net:
     driver: bridge

@@ -152,8 +152,9 @@ python asana_cli.py move <task_id> <section>  # Move a task to a section
 ```
 
 ---
+POSTMAN:
 
-<img width="473" height="957" alt="image" src="https://github.com/user-attachments/assets/2d65d0d7-ec8d-4698-8ea3-cb3e2c302dfb" />
+<img width="473" height="750" alt="image" src="https://github.com/user-attachments/assets/2d65d0d7-ec8d-4698-8ea3-cb3e2c302dfb" />
 
 
 

@@ -1,37 +1,5 @@
 # Microservice Project — Group 10
 
-
-JİRADALİ TASKLARI TAŞIMAK:
-# Ticket'ı başlat
-git commit --allow-empty -m "#in-progress KAN-6"
-git push
-# Review'a al
-git commit --allow-empty -m "#review KAN-6"
-git push
-# Tamamla
-git commit --allow-empty -m "#done KAN-6"
-git push
-
-
-ASANADAKİ TASKLARI TAŞIMAK(WİTH ID)
-python asana_cli.py
-python asana_cli.py move 1214271683395828 done
-python asana_cli.py move 1214271683395828 doing
-
-
-TİCKET ÜZERİNDEKİ GİTHUB İKONU(JİRA)
-Dal oluştur:
-git checkout -b feature/KAN-15-confluence-asena
-+Dosyanda bir değişiklik yap, sonra:
- git add . 
-git commit -m "KAN-15 confluence denemesi asena" 
-git push origin feature/KAN-15-confluence-asena
-
-+Eğer değişilik yapmadana atacaksan:
-git commit --allow-empty -m "KAN-15 confluence ikinci güncelleme"
-git push origin feature/KAN-15-confluence-asena
-
-
 A microservice-based software development infrastructure built with Python (Flask), C# (.NET 10), and Docker. The system includes three application services orchestrated via Docker Compose, integrated with a full DevOps toolchain.
 
 ---
@@ -184,9 +152,11 @@ python asana_cli.py move <task_id> <section>  # Move a task to a section
 ```
 
 ---
+POSTMAN:
 
-## Team
+<img width="373" height="750" alt="image" src="https://github.com/user-attachments/assets/2d65d0d7-ec8d-4698-8ea3-cb3e2c302dfb" />
 
-**Beyza Zülal Odabaşı · Rumeysa Semiz** — Group 10
+
+
 
 

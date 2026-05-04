@@ -1,0 +1,57 @@
+{
+  "info": {
+    "name": "Webhook Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5003/health"
+      }
+    },
+    {
+      "name": "Gitea Webhook — Close Jira Ticket",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5003/webhook",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"commits\": [\n    {\n      \"message\": \"Fixes KAN-6 user service completed\"\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Gitea Webhook — Multiple Tickets",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5003/webhook",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"commits\": [\n    {\n      \"message\": \"Fixes KAN-4 user service added\"\n    },\n    {\n      \"message\": \"Closes KAN-15 confluence docs completed\"\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Gitea Webhook — Invalid Payload",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5003/webhook",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        }
+      }
+    }
+  ]
+}

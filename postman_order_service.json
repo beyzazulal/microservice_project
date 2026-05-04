@@ -1,0 +1,64 @@
+{
+  "info": {
+    "name": "Order Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Orders",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5002/orders"
+      }
+    },
+    {
+      "name": "Get Order by ID",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5002/orders/1"
+      }
+    },
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5002/orders",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user_id\": 1,\n  \"product\": \"Laptop\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Update Order Status",
+      "request": {
+        "method": "PUT",
+        "url": "http://localhost:5002/orders/1/status",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"shipped\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Delete Order",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:5002/orders/1"
+      }
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5002/health"
+      }
+    }
+  ]
+}

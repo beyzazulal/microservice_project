@@ -1,0 +1,50 @@
+{
+  "info": {
+    "name": "Notification Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Send Slack Notification",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5003/api/notify",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"Test notification from Notification Service\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Order Created Notification",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5003/api/notify",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"New order created — user_id: 1, product: Laptop\"\n}"
+        }
+      }
+    },
+    {
+      "name": "User Created Notification",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5003/api/notify",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"New user registered — Beyza, beyza@test.com\"\n}"
+        }
+      }
+    }
+  ]
+}

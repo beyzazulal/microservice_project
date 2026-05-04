@@ -1,7 +1,8 @@
 import sys
 import requests
 
-ASANA_TOKEN = "YOUR_ASANA_TOKEN_HERE"
+import os
+ASANA_TOKEN = os.environ.get("ASANA_TOKEN", "")
 PROJECT_ID = "1214271683377823"
 
 HEADERS = {"Authorization": f"Bearer {ASANA_TOKEN}"}
